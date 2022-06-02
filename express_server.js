@@ -1,4 +1,5 @@
 const express = require("express");
+const res = require("express/lib/response");
 const app = express();
 const PORT = 8080;
 app.set('view engine', 'ejs');
@@ -16,3 +17,9 @@ app.use(morgan('dev'));
 app.listen(PORT, () => {
   console.log(`express_server listening on port ${PORT}`)
 });
+
+// GET ROUTES
+
+app.get('*', (req, res) => {
+  res.render('home');
+})
