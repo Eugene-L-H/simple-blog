@@ -5,9 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- js files -->
-  <!-- <script src="../helper_funcitons/globalVars.js" defer></script> -->
-  <script src="../helper_funcitons/populatBlogEntries.js" defer></script>
-  <script src="../index.js" defer></script>
+  <script src="../scripts/helper_funcitons/delete_blog_post.js" defer></script>
   <title>Simple Blog</title>
 </head>
 <body>
@@ -18,12 +16,12 @@
     </form>
   </div>
   <div class="blog-entries">
-    <% blogPosts.forEach(blog => { %>
+    <% blogPosts.forEach(post => { %>
       <div class="post-wrapper">
-        <p class="title"><%= blog['title'] %> - by <span class="author"><%= blog['author'] %></span></p>
-        <p class="content"><%= blog['content'] %></p>
-        <p class="date"><%= blog['post_date'].toDateString() %></p>
-        <input type="button" class="delete-post" value="x">
+        <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
+        <p class="content"><%= post['content'] %></p>
+        <p class="date"><%= post['post_date'].toDateString() %></p>
+        <input type="button" class="delete-post" name="<%= post['id'] %>" value="x">
       </div>
     <% }); %> 
   </div>

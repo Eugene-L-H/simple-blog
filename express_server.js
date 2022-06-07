@@ -9,15 +9,13 @@ app.set('view engine', 'ejs');
 const morgan = require('morgan');
 app.use(morgan('dev'));
 
+const path = require("path");
+app.use(express.static(path.join(__dirname, 'public')));
+
 // HELPER FUNCTIONS
 
 // GLOBAL VARIABLES
-const currentUser = 'Eugene';
-
-// Listen for incoming requests
-app.listen(PORT, () => {
-  console.log(`express_server listening on port ${PORT}`)
-});
+const currentUser = 'Eugene'; // user who is currently logged in
 
 // CONNECT TO DATABASE
 const { Client } = require('pg');
@@ -46,9 +44,12 @@ client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, r
 
 console.log(blogPosts)
 
-// const blog_posts = returnBlogPosts();
-
 // GET ROUTES
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.render('index', { blogPosts });
 })
+
+// Listen for incoming requests
+app.listen(PORT, () => {
+  console.log(`express_server listening on port ${PORT}`)
+});
