@@ -19,9 +19,9 @@
   </div>
   <div class="blog-entries">
     <% tempBlogsArr.forEach(blog => { %>
-        <p><%= blog['title'] %> - by <%= blog['author'] %></p>
-        <p><%= blog['content'] %></p>
-        <p><%= blog['date'] %></p>
+      <p class="title"><%= blog['title'] %> - by <span class="author"><%= blog['author'] %></span></p>
+      <p class="content"><%= blog['content'] %></p>
+      <p class="date"><%= blog['date'] %></p>
     <% }); %> 
   </div>
 </body>
