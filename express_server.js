@@ -12,60 +12,43 @@ app.use(morgan('dev'));
 // HELPER FUNCTIONS
 
 // GLOBAL VARIABLES
-const tempBlogsArr = [
-  // Temporary hard code for blog entries. To be replaced with database values
-  {
-    'author': 'Eugene',
-    'title': 'Heartbroken and Frustrated',
-    'content': 'This would be the content for the first blog post.',
-    'date': '2022-05-15',
-  },
-  {
-    'author': 'Eugene',
-    'title': 'Happy Birthday Mom',
-    'content': 'This would be the content for the second blog post. Happy birthday Mom',
-    'date': '2022-03-31',
-  },
-  {
-    'author': 'Eugene',
-    'title': 'Happy B-day Dad',
-    'content': 'This would be the content for the third blog post. Dad, Happy Birthday.',
-    'date': '2022-01-05',
-  },
-  {
-    'author': 'Eugene',
-    'title': 'Merry Christmas!',
-    'content': 'This would be the content for the fourth blog post. Merry Christmas.',
-    'date': '2021-12-25',
-  },
-]
-
-// CONNECT TO DATABASE
-const { Client } = require('pg');
-
-const client = new Client ({
-  user: 'labber',
-  host: 'localhost',
-  database: 'simpleblog',
-  password: 'labber',
-  port: 5432
-});
-
-client.connect((err) => {
-  if (err) throw err;
-  console.log('connected to database');
-});
-
-// const blog_posts = returnBlogPosts();
+const currentUser = 'Eugene';
 
 // Listen for incoming requests
-
 app.listen(PORT, () => {
   console.log(`express_server listening on port ${PORT}`)
 });
 
-// GET ROUTES
+// CONNECT TO DATABASE
+const { Client } = require('pg');
 
+const client = new Client({
+  host: 'localhost',
+  user: 'labber',
+  password: 'labber',
+  database: 'simpleblog',
+  port: 5432
+})
+
+client.connect();
+
+let blogPosts;
+
+client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
+  if(!err) {
+    console.log('inside no-error block.')
+    blogPosts = res.rows;
+  } else {
+    console.log(err.message);
+  }
+  client.end;
+});
+
+console.log(blogPosts)
+
+// const blog_posts = returnBlogPosts();
+
+// GET ROUTES
 app.get('*', (req, res) => {
-  res.render('index', { tempBlogsArr });
+  res.render('index', { blogPosts });
 })

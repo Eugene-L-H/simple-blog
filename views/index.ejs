@@ -18,11 +18,14 @@
     </form>
   </div>
   <div class="blog-entries">
-    <% tempBlogsArr.forEach(blog => { %>
-      <p class="title"><%= blog['title'] %> - by <span class="author"><%= blog['author'] %></span></p>
-      <p class="content"><%= blog['content'] %></p>
-      <p class="date"><%= blog['date'] %></p>
+    <% blogPosts.forEach(blog => { %>
+      <div class="post-wrapper">
+        <p class="title"><%= blog['title'] %> - by <span class="author"><%= blog['author'] %></span></p>
+        <p class="content"><%= blog['content'] %></p>
+        <p class="date"><%= blog['post_date'].toDateString() %></p>
+        <input type="button" class="delete-post" value="x">
+      </div>
     <% }); %> 
   </div>
 </body>
-</html>
+</html> 

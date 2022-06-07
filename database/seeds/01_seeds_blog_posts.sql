@@ -1,4 +1,4 @@
-INSERT INTO blog_posts (title, author, content, post_date)
+INSERT INTO blog_posts (author, title, content, post_date)
   VALUES 
   (
     'Eugene',
@@ -23,4 +23,4 @@ INSERT INTO blog_posts (title, author, content, post_date)
 
     Bibendum at varius vel pharetra vel turpis nunc eget. Tempus egestas sed sed risus pretium quam vulputate dignissim. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Cras ornare arcu dui vivamus arcu felis bibendum ut. Accumsan lacus vel facilisis volutpat est velit egestas dui id. Vivamus arcu felis bibendum ut tristique et egestas. Vitae nunc sed velit dignissim sodales. Porttitor lacus luctus accumsan tortor posuere. Faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique.',
     '2022-01-05'
-  )
+  );
