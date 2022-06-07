@@ -1,3 +1,7 @@
 const deleteButtons = document.getElementsByClassName('delete-post');
 
-console.log(deleteButtons);
+for (let button of deleteButtons) {
+  button.addEventListener('click', () => {
+    alert('click!');
+  });
+}
