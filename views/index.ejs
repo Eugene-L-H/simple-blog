@@ -19,11 +19,11 @@
   </div>
   <div class="blog-entries">
     <% blogPosts.forEach(post => { %>
-      <div class="post-wrapper">
+      <div class="post-wrapper" name="<%= post['id'] %>">
         <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
         <p class="content"><%= post['content'] %></p>
         <p class="date"><%= post['post_date'].toDateString() %></p>
-        <input type="button" class="delete-post" name="<%= post['id'] %>" value="x">
+        <input type="button" class="delete-post" name="<%= post['id'] %>" value="Delete Post">
       </div>
     <% }); %> 
   </div>

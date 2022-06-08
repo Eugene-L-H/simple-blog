@@ -34,7 +34,7 @@ let blogPosts;
 
 client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
   if(!err) {
-    console.log('inside no-error block.')
+    console.log('Connected to database.')
     blogPosts = res.rows;
   } else {
     console.log(err.message);
@@ -47,12 +47,30 @@ console.log(blogPosts)
 // GET ROUTES
 app.get('/', (req, res) => {
   res.render('index', { blogPosts });
-})
+});
 
 // POST ROUTES
-app.post('/')
+app.post('/:post_id/delete', (req, res) => {
+
+  console.log('Delete request recieved');
+  const post_id = req.params['post_id'];
+
+  const deletePost = `
+    DELETE FROM blog_posts
+    WHERE ID = ${post_id}
+    AND author = '${currentUser}'
+  `;
+
+  client.query(deletePost, (err, res) => {
+    if(!err) {
+      console.log('Deleting post from db');  
+    } else {
+      console.log('Error deleting post: ', err.message);
+    }
+  });
+});
 
 // Listen for incoming requests
 app.listen(PORT, () => {
-  console.log(`express_server listening on port ${PORT}`)
+  console.log(`express_server listening on port ${PORT}`);
 });
