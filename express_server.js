@@ -32,7 +32,7 @@ client.connect();
 
 let blogPosts;
 
-const retrieveBlogPosts = () => {
+const retrieveBlogPostsFromDatabase = () => {
   client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
     if(!err) {
       console.log('Connected to database.')
@@ -44,7 +44,7 @@ const retrieveBlogPosts = () => {
   });
 }
 
-retrieveBlogPosts();
+retrieveBlogPostsFromDatabase();
 
 // GET ROUTES
 app.get('/', (req, res) => {
@@ -67,11 +67,35 @@ app.post('/:post_id/delete', (req, res) => {
     if(!err) {
       console.log('Deleting post from db');
       // Refresh blogPosts variable with updated database
-      retrieveBlogPosts();  
+      retrieveBlogPostsFromDatabase();  
     } else {
       console.log('Error deleting post: ', err.message);
     }
   });
+});
+
+// Save new blog post
+app.post('/new-post/:post_title/:post_body', (req, res) => {
+  console.log('recieved incoming post')
+  const postTitle = req.params['post_title'];
+  const postBody = req.params['post_body'];
+  const todayDate = new Date();
+  postDate = todayDate.toISOString().split('T')[0];
+
+  const addPost = `
+    INSERT INTO blog_posts (author, title, content, post_date)
+    VALUES ('${currentUser}', '${postTitle}', '${postBody}', '${postDate}')
+  `;
+
+  client.query(addPost, (err, res) => {
+    if(!err) {
+      console.log('Creating new post');
+      retrieveBlogPostsFromDatabase();
+    } else {
+      console.log('Error creating post: ', err.message);
+    }
+
+  })
 });
 
 // Listen for incoming requests
