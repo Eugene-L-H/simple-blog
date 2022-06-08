@@ -9,10 +9,10 @@ app.set('view engine', 'ejs');
 const morgan = require('morgan');
 app.use(morgan('dev'));
 
+// Use static module so client-side js can be linked to ejs file
 const path = require("path");
 app.use(express.static(path.join(__dirname, 'public')));
 
-// HELPER FUNCTIONS
 
 // GLOBAL VARIABLES
 const currentUser = 'Eugene'; // user who is currently logged in
@@ -48,6 +48,9 @@ console.log(blogPosts)
 app.get('/', (req, res) => {
   res.render('index', { blogPosts });
 })
+
+// POST ROUTES
+app.post('/')
 
 // Listen for incoming requests
 app.listen(PORT, () => {
