@@ -32,17 +32,19 @@ client.connect();
 
 let blogPosts;
 
-client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
-  if(!err) {
-    console.log('Connected to database.')
-    blogPosts = res.rows;
-  } else {
-    console.log(err.message);
-  }
-  client.end;
-});
+const retrieveBlogPosts = () => {
+  client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
+    if(!err) {
+      console.log('Connected to database.')
+      blogPosts = res.rows;
+    } else {
+      console.log(err.message);
+    }
+    client.end;
+  });
+}
 
-console.log(blogPosts)
+retrieveBlogPosts();
 
 // GET ROUTES
 app.get('/', (req, res) => {
@@ -63,7 +65,9 @@ app.post('/:post_id/delete', (req, res) => {
 
   client.query(deletePost, (err, res) => {
     if(!err) {
-      console.log('Deleting post from db');  
+      console.log('Deleting post from db');
+      // Refresh blogPosts variable with updated database
+      retrieveBlogPosts();  
     } else {
       console.log('Error deleting post: ', err.message);
     }
