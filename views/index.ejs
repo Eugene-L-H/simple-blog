@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- js files -->
   <script src="../scripts/helper_funcitons/delete_blog_post.js" defer></script>
+  <script src="../scripts/helper_funcitons/edit_blog_post.js" defer></script>
   <script src="../scripts/helper_funcitons/submit_blog_post.js" defer></script>
   <title>Simple Blog</title>
 </head>
@@ -20,11 +21,12 @@
   </div>
   <div class="blog-entries">
     <% blogPosts.forEach(post => { %>
-      <div class="post-wrapper" name="<%= post['id'] %>">
+      <div class="post-wrapper">
         <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
-        <p class="content"><%= post['content'] %></p>
+        <p class="content" name="<%= post['id'] %>"><%= post['content'] %></p>
         <p class="date"><%= post['post_date'].toDateString() %></p>
         <input type="button" class="delete-post" name="<%= post['id'] %>" value="Delete Post">
+        <input type="button" class="edit-post" name="<%= post['id'] %>" value="Edit Post">
       </div>
     <% }); %> 
   </div>
