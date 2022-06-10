@@ -11,10 +11,12 @@ const createEditPostHTML = (bodyText, postID) => {
 
     // Create confirm or cancel buttons
     let cancelButton = document.createElement('input');
-    cancelButton.setAttribute('class', 'edit-btn');
+    cancelButton.setAttribute('type', 'button');
+    cancelButton.setAttribute('class', 'cancel-btn');
     cancelButton.setAttribute('value', '❌');
     let confirmButton = document.createElement('input');
-    confirmButton.setAttribute('class', 'edit-btn')
+    confirmButton.setAttribute('type', 'button');
+    confirmButton.setAttribute('class', 'confirm-btn')
     confirmButton.setAttribute('value', '✅');
     
     // Append created elements to editDiv
@@ -26,6 +28,8 @@ const createEditPostHTML = (bodyText, postID) => {
 }
 
 
+
+// Add event listeners to 'Edit Post' buttons
 for (let button of editButtons) {
   button.addEventListener('click', (e) => {
     const postID = e.target["name"];
@@ -36,8 +40,31 @@ for (let button of editButtons) {
 
         const editPostHTML = createEditPostHTML(bodyText, postID);
 
-        console.log('editPostHTML: ', editPostHTML)
+        // Get blog-post HTML from post clicked on
+        const currentPostStateWrapper = document.querySelector(
+          `.post-wrapper${postID}`
+        );
 
+        /* Used to restore the title, edit/delete buttons and <p> section back to it's previous HTML state, with or without edits to the post-body */
+        const currentPostState = currentPostStateWrapper.children;
+        const postStateStaticCopy = [...currentPostState];
+
+        // Convert post area HTML to one that can edit the body
+        currentPostStateWrapper.innerHTML = '';
+        currentPostStateWrapper.append(editPostHTML);
+
+        const cancelButton = document.querySelector('.cancel-btn');
+        cancelButton.addEventListener('click', () => {
+
+          // Revert HTML to it's original state before edit button was clicked
+          currentPostStateWrapper.innerHTML = '';
+          for (let element of postStateStaticCopy) {
+            currentPostStateWrapper.append(element);
+          }
+        });
+        
+        // Match between button and post found; break
+        break;
       }
     }
   });
