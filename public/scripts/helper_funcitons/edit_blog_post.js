@@ -34,13 +34,16 @@ for (let button of editButtons) {
   button.addEventListener('click', (e) => {
     const postID = e.target["name"];
 
+    // Define behaviours for the cancel and submit buttons
     for (let postBody of postBodies) {
       if (postBody.getAttribute('name') === postID) {
+        // Save the initial text content from the selected blog post
         const bodyText = postBody.innerHTML;
 
+        // Generate the HTML that will replace the original while editing
         const editPostHTML = createEditPostHTML(bodyText, postID);
 
-        // Get blog-post HTML from post clicked on
+        // Get blog-post HTML from post clicked on 
         const currentPostStateWrapper = document.querySelector(
           `.post-wrapper${postID}`
         );
