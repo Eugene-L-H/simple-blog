@@ -48,7 +48,7 @@ retrieveBlogPostsFromDatabase();
 
 // GET ROUTES
 app.get('/', (req, res) => {
-  res.render('index', { blogPosts });
+  res.render('index', { blogPosts, currentUser });
 });
 
 // POST ROUTES

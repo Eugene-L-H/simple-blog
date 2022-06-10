@@ -21,7 +21,7 @@
   </div>
   <div class="blog-entries">
     <% blogPosts.forEach(post => { %>
-      <div class="post-wrapper<%= post['id'] %>">
+      <div class="post-wrapper post-wrapper<%= post['id'] %>" name="<%= post['id'] %>">
         <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
         <p class="content" name="<%= post['id'] %>"><%= post['content'] %></p>
         <p class="date"><%= post['post_date'].toDateString() %></p>

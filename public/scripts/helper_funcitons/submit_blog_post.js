@@ -1,3 +1,4 @@
+const blogEntries = documnet.querySelector('.blog-entries');
 const submitButton = document.querySelector('.submit-post');
 const title = document.querySelector('.post-title');
 const postBody = document.querySelector('.post-body');
