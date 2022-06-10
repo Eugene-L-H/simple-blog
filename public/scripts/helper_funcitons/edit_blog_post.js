@@ -7,6 +7,7 @@ const createEditPostHTML = (bodyText, postID) => {
     editDiv.setAttribute('name', postID);
     let editTextarea = document.createElement('textarea');
     editTextarea.setAttribute('style', 'resize: none');
+    editTextarea.setAttribute('class', 'edited-text');
     editTextarea.innerHTML = bodyText;
 
     // Create confirm or cancel buttons
@@ -55,17 +56,36 @@ for (let button of editButtons) {
         // Convert post area HTML to one that can edit the body
         currentPostStateWrapper.innerHTML = '';
         currentPostStateWrapper.append(editPostHTML);
-
-        const cancelButton = document.querySelector('.cancel-btn');
-        cancelButton.addEventListener('click', () => {
-
+        
+        // CANCEL EDIT BUTTON
+        const cancelEditButton = document.querySelector('.cancel-btn');
+        cancelEditButton.addEventListener('click', () => {
           // Revert HTML to it's original state before edit button was clicked
           currentPostStateWrapper.innerHTML = '';
           for (let element of postStateStaticCopy) {
             currentPostStateWrapper.append(element);
           }
         });
-        
+
+        // CONFIRM EDIT BUTTON
+        const confirmEditButton = document.querySelector('.confirm-btn');
+        confirmEditButton.addEventListener('click', () => {
+          // Get the value from the textarea that user was editing
+          const editedText = document.querySelector('.edited-text').value;
+
+          //Clear the HTML for the edit box so blog HTML can be restored
+          currentPostStateWrapper.innerHTML = '';
+
+          // Update HTML with new edited post
+          for (let element of postStateStaticCopy) {
+            if (element.getAttribute('class') === 'content') {
+              // Insert edited blog content into the content <p> for the post
+              element.innerHTML = editedText;
+            }
+            currentPostStateWrapper.append(element);
+          }
+        });
+
         // Match between button and post found; break
         break;
       }
