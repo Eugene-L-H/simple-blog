@@ -84,6 +84,14 @@ for (let button of editButtons) {
             }
             currentPostStateWrapper.append(element);
           }
+
+          // Update database with new value
+
+          // prepare http request to be sent to the server
+          let xhr = new XMLHttpRequest();
+          xhr.open('POST', `/edit-post/${postID}`);
+
+          xhr.send(editedText);
         });
 
         // Match between button and post found; break

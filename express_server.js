@@ -9,6 +9,9 @@ app.set('view engine', 'ejs');
 const morgan = require('morgan');
 app.use(morgan('dev'));
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.text({ type: "text/plain" }));
+
 // Use static module so client-side js can be linked to ejs file
 const path = require("path");
 app.use(express.static(path.join(__dirname, 'public')));
@@ -52,6 +55,8 @@ app.get('/', (req, res) => {
 });
 
 // POST ROUTES
+
+// Delete post
 app.post('/:post_id/delete', (req, res) => {
 
   console.log('Delete request recieved');
@@ -95,8 +100,30 @@ app.post('/new-post/:post_title/:post_body', (req, res) => {
       console.log('Error creating post: ', err.message);
     }
 
-  })
+  });
 });
+
+// Update blog post content from user edit
+app.post('/edit-post/:post_ID', (req, res) => {
+  console.log('Sever recieved edited post')
+  console.log('Reck that body: ', req.body)
+  console.log('req.params[postID]: ', req.params['post_ID'])
+
+  const editedContent = `
+    UPDATE blog_posts
+    SET content = '${req.body}'
+    WHERE id = ${req.params['post_ID']};
+  `;
+
+  client.query(editedContent, (err, res) => {
+    if(!err) {
+      console.log('Blog post content updated');
+      retrieveBlogPostsFromDatabase();
+    } else {
+      console.log('Error updating content: ', err.message);
+    }
+  });
+})
 
 // Listen for incoming requests
 app.listen(PORT, () => {
