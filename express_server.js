@@ -40,6 +40,9 @@ const retrieveBlogPostsFromDatabase = () => {
     if(!err) {
       console.log('Connected to database.')
       blogPosts = res.rows;
+      blogPosts = blogPosts.sort((a, b) => {
+        return b.post_date - a.post_date;
+      });
     } else {
       console.log(err.message);
     }
@@ -56,7 +59,7 @@ app.get('/', (req, res) => {
 
 // POST ROUTES
 
-// Delete post
+// DELETE post
 app.post('/:post_id/delete', (req, res) => {
 
   console.log('Delete request recieved');
@@ -79,7 +82,7 @@ app.post('/:post_id/delete', (req, res) => {
   });
 });
 
-// Save new blog post
+// CREATE new blog post
 app.post('/new-post/:post_title/:post_body', (req, res) => {
   console.log('recieved incoming post')
   const postTitle = req.params['post_title'];
@@ -103,11 +106,9 @@ app.post('/new-post/:post_title/:post_body', (req, res) => {
   });
 });
 
-// Update blog post content from user edit
+// UPDATE blog post content from user edit
 app.post('/edit-post/:post_ID', (req, res) => {
   console.log('Sever recieved edited post')
-  console.log('Reck that body: ', req.body)
-  console.log('req.params[postID]: ', req.params['post_ID'])
 
   const editedContent = `
     UPDATE blog_posts

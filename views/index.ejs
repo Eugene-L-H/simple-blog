@@ -20,6 +20,7 @@
     <input type="button" class="submit-post" value="Submit Post">
   </div>
   <div class="blog-entries">
+    <% console.log(blogPosts) %>
     <% blogPosts.forEach(post => { %>
       <div class="post-wrapper post-wrapper<%= post['id'] %>" name="<%= post['id'] %>">
         <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
