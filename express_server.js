@@ -18,7 +18,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // GLOBAL VARIABLES
-const currentUser = 'Eugene'; // user who is currently logged in
+const loggedIn = false;
+let currentUser = ''; // user who is currently logged in
+if (loggedIn) currentUser = 'Eugene';
 
 // CONNECT TO DATABASE
 const { Client } = require('pg');
@@ -54,7 +56,7 @@ retrieveBlogPostsFromDatabase();
 
 // GET ROUTES
 app.get('/', (req, res) => {
-  res.render('index', { blogPosts, currentUser });
+  res.render('index', { blogPosts, currentUser, loggedIn });
 });
 
 // POST ROUTES
