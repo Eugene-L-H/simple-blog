@@ -9,12 +9,13 @@ submitButton.addEventListener('click', () => {
 
   // prepare http request to be sent to the server
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', `/new-post/${post_title}/${post_body}`);
+  xhr.open('POST', `/new-post/${post_title}`);
 
     if (confirm('Submit post?')) {
       console.log('post submitted')
-      xhr.send();
+      xhr.send(post_body);
     } else {
       console.log('Post not submitted')
     }
+    window.location.reload(true);
 });

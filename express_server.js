@@ -38,7 +38,7 @@ let blogPosts;
 const retrieveBlogPostsFromDatabase = () => {
   client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
     if(!err) {
-      console.log('Connected to database.')
+      console.log('Fetching posts from database.')
       blogPosts = res.rows;
       blogPosts = blogPosts.sort((a, b) => {
         return b.post_date - a.post_date;
@@ -75,7 +75,7 @@ app.post('/:post_id/delete', (req, res) => {
     if(!err) {
       console.log('Deleting post from db');
       // Refresh blogPosts variable with updated database
-      retrieveBlogPostsFromDatabase();  
+      retrieveBlogPostsFromDatabase();
     } else {
       console.log('Error deleting post: ', err.message);
     }
@@ -83,26 +83,26 @@ app.post('/:post_id/delete', (req, res) => {
 });
 
 // CREATE new blog post
-app.post('/new-post/:post_title/:post_body', (req, res) => {
+app.post('/new-post/:post_title', (req, res) => {
   console.log('recieved incoming post')
   const postTitle = req.params['post_title'];
-  const postBody = req.params['post_body'];
+  const postBody = req.body;
   const todayDate = new Date();
   postDate = todayDate.toISOString().split('T')[0];
-
+  
   const addPost = `
-    INSERT INTO blog_posts (author, title, content, post_date)
-    VALUES ('${currentUser}', '${postTitle}', '${postBody}', '${postDate}')
+  INSERT INTO blog_posts (author, title, content, post_date)
+  VALUES ('${currentUser}', '${postTitle}', '${postBody}', '${postDate}')
   `;
-
-  client.query(addPost, (err, res) => {
+  
+  client.query(addPost, (err, respond) => {
     if(!err) {
       console.log('Creating new post');
       retrieveBlogPostsFromDatabase();
+      return res.render('index', { blogPosts, currentUser });
     } else {
       console.log('Error creating post: ', err.message);
     }
-
   });
 });
 
