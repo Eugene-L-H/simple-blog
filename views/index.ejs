@@ -5,10 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- js files -->
-  <script src="../scripts/register_user.js" defer></script>
-  <script src="../scripts/delete_blog_post.js" defer></script>
-  <script src="../scripts/edit_blog_post.js" defer></script>
-  <script src="../scripts/submit_blog_post.js" defer></script>
+  <% if (!loggedIn) { %>
+    <!-- These files load only when user not logged in -->
+    <script src="../scripts/login.js" defer></script>
+    <script src="../scripts/register_user.js" defer></script>
+  <% } %>
+  <% if (loggedIn) { %>
+    <script src="../scripts/submit_blog_post.js" defer></script>
+    <script src="../scripts/edit_blog_post.js" defer></script>
+    <script src="../scripts/delete_blog_post.js" defer></script>
+  <% } %>
   <title>Simple Blog</title>
 </head>
 <body>
@@ -23,9 +29,10 @@
     <div class="login-register">
       <div class="login">
         <label for="login">Username:</label>
-        <input type="text" name="login" placeholder="username"> 
+        <input type="text" class="username-field" name="login" placeholder="username"> 
         <label for="password">Password:</label>
-        <input type="text" name="password" placeholder="password">
+        <input type="text" class="password-field"  name="password" placeholder="password">
+        <input type="button" class="submit-login" value="Submit">
       </div>
       <div class="register">
         <p class="register-prompt">

@@ -18,9 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // GLOBAL VARIABLES
-const loggedIn = false;
+let loggedIn = false;
 let currentUser = ''; // user who is currently logged in
-if (loggedIn) currentUser = 'Eugene';
 
 // CONNECT TO DATABASE
 const { Client } = require('pg');
@@ -47,20 +46,50 @@ const retrieveBlogPostsFromDatabase = () => {
         return b.post_date - a.post_date;
       });
     } else {
-      console.log(err.message);
+      console.log('Error retrieving posts: ', err.message);
     }
-    client.end;
+    // client.end; - don't think I need this..
   });
 }
 
 retrieveBlogPostsFromDatabase();
 
-// GET ROUTES
-app.get('/', (req, res) => {
-  res.render('index', { blogPosts, currentUser, loggedIn });
-});
-
 // POST ROUTES
+
+// User Login
+app.post('/login/:username', (req, res) => {
+  const username = req.params.username;
+  const password = req.body;
+
+  // Check database for matching credentials
+  const checkCredentials = `
+    SELECT EXISTS (
+      SELECT * FROM users
+      WHERE user_name = '${username}'
+      AND user_password = '${password}'
+    )
+  `;
+
+  client.query(checkCredentials, (err, queryResults) => {
+    if(!err) {
+      // If username/password combo exists in database:
+      if(queryResults.rows[0]['exists']) {
+        loggedIn = true;
+        currentUser = username;
+        console.log(`Logging ${currentUser} in...`);
+
+        // Load posts from database authored by logged in user
+        retrieveBlogPostsFromDatabase();
+        res.render('index', { blogPosts, currentUser, loggedIn })
+      } else {
+        console.log('Username or password does not match.')
+      }
+    } else {
+      console.log('Error: ', err.message);
+    }
+  });
+
+});
 
 // DELETE post
 app.post('/:post_id/delete', (req, res) => {
@@ -102,21 +131,25 @@ app.post('/new-post/:post_title', (req, res) => {
     if(!err) {
       console.log('Creating new post');
       retrieveBlogPostsFromDatabase();
-      return res.render('index', { blogPosts, currentUser });
+      return res.render('index', { blogPosts, currentUser, loggedIn });
     } else {
       console.log('Error creating post: ', err.message);
     }
   });
 });
 
+// Register new user
 app.post('/register-user', (req, res) => {
   console.log('Registration data recieved');
   const registrationQueryString = req.body;
 
-  // Convert query string to JS object extract username + password
+  // Convert query-string to JS object extract username + password
   const nameAndPassword = JSON.parse('{"' + registrationQueryString.replace(/&/g, '","').replace(/=/g,'":"') + '"}', (key, value) => { return key===""?value:decodeURIComponent(value) });
+
   const username = nameAndPassword['username'];
   const password = nameAndPassword['password'];
+
+  // TODO: HASH/ENCRYPT PASSWORD BEFORE SUBMITTING *
 
   const registerUser = `
     INSERT INTO users (user_name, user_password)
@@ -153,6 +186,14 @@ app.post('/edit-post/:post_ID', (req, res) => {
     }
   });
 })
+
+// GET ROUTES
+
+// Render main page
+app.get('/', (req, res) => {
+  res.render('index', { blogPosts, currentUser, loggedIn });
+});
+
 
 // Listen for incoming requests
 app.listen(PORT, () => {

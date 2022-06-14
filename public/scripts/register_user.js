@@ -19,10 +19,12 @@ const restoreLoginRegister = `
 // Adds event listener to the REGISTER text under login prompt
 const addListenerToClickRegister = () => {
   const clickRegister = document.querySelector('.click-register');
-  clickRegister.addEventListener('click', () => {
-    loginRegisterDiv.innerHTML = '';
-    loginRegisterDiv.append(registrationForm);
-  });
+  if (!clickRegister === null) {
+    clickRegister.addEventListener('click', () => {
+      loginRegisterDiv.innerHTML = '';
+      loginRegisterDiv.append(registrationForm);
+    });
+  }
 }
 
 // Add listener to the submit registration button
