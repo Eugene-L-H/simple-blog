@@ -1,0 +1,83 @@
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+h1 {
+  width: fit-content;
+  margin-top: 1.5%;
+}
+
+.login-register,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin-top: 3%;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Label for login */
+.login label,
+.register-form label {
+  /* width: 12.5%; */
+  font-size: 1em;
+  margin-bottom: 0.25em;
+}
+
+.login input,
+.register-form input {
+  margin-bottom: 1em;
+  padding: 0.25em 0;
+}
+
+.login .submit-login,
+.submit-registration {
+  width: 40%;
+}
+
+.register-prompt {
+  font-size: 0.85em;
+  margin-top: 0.25em;
+}
+
+.click-register {
+  color: blue;
+}
+
+.click-register:hover {
+  text-decoration: underline;
+  color: red;
+  cursor: pointer;
+}
+
+/* Registration form */
+.registration-title_div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* "Register" title at the top of the registration form */
+.form-title {
+  text-decoration: underline;
+  font-size: 1.25em;
+  margin-bottom: 1em;
+  margin-right: 28%;
+}
+
+.cancel-registration {
+  text-align: center;
+  height: 2em;
+  width: 2em;
+  margin-right: auto;
+}

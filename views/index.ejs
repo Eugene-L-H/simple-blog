@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS -->
+  <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../styles/header.css">
   <!-- js files -->
   <% if (!loggedIn) { %>
     <!-- These files load only when user not logged in -->
@@ -19,29 +22,31 @@
   <title>Simple Blog</title>
 </head>
 <body>
-  <h1>Simple Blog</h1>
-  <!-- Display login inputs if not logged in, logout input if logged in-->
-  <% if (loggedIn) { %>
-      <div class="logout">
-        <p>Logged in as: <%= currentUser %></p>
-        <input type="button" class="logout-button" value="Logout">
+  <header>
+    <h1>Simple Blog</h1>
+    <!-- Display login inputs if not logged in, logout input if logged in-->
+    <% if (loggedIn) { %>
+        <div class="logout">
+          <p>Logged in as: <%= currentUser %></p>
+          <input type="button" class="logout-button" value="Logout">
+        </div>
+    <% } else { %>
+      <div class="login-register">
+        <div class="login">
+          <label for="login">Login:</label>
+          <input type="text" class="username-field" name="login" placeholder="username">
+          <label for="password">Password:</label>
+          <input type="text" class="password-field"  name="password" placeholder="password">
+          <input type="button" class="submit-login" value="Login">
+        </div>
+        <div class="register">
+          <p class="register-prompt">
+            No account? <span class="click-register">REGISTER</span>
+          </p>
+        </div>
       </div>
-  <% } else { %> 
-    <div class="login-register">
-      <div class="login">
-        <label for="login">Username:</label>
-        <input type="text" class="username-field" name="login" placeholder="username"> 
-        <label for="password">Password:</label>
-        <input type="text" class="password-field"  name="password" placeholder="password">
-        <input type="button" class="submit-login" value="Submit">
-      </div>
-      <div class="register">
-        <p class="register-prompt">
-          No account? <span class="click-register">REGISTER</span>
-        </p>
-      </div>
-    </div>
-  <% } %> 
+    <% } %>
+  </header>
 
   <!-- If user is not logged in do not display textarea for new post-->
   <!-- Do not display blog posts if not logged in -->

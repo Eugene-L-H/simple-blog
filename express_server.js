@@ -37,6 +37,7 @@ client.connect();
 
 let blogPosts;
 
+// Pull blog posts from database submitted by current user
 const retrieveBlogPostsFromDatabase = () => {
   client.query(`SELECT * FROM blog_posts WHERE author = '${currentUser}'`, (err, res) => {
     if(!err) {
