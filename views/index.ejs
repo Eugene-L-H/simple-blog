@@ -11,6 +11,7 @@
     <script src="../scripts/register_user.js" defer></script>
   <% } %>
   <% if (loggedIn) { %>
+    <script src="../scripts/logout.js" defer></script>
     <script src="../scripts/submit_blog_post.js" defer></script>
     <script src="../scripts/edit_blog_post.js" defer></script>
     <script src="../scripts/delete_blog_post.js" defer></script>
@@ -23,7 +24,7 @@
   <% if (loggedIn) { %>
       <div class="logout">
         <p>Logged in as: <%= currentUser %></p>
-        <input type="button" value="Logout">
+        <input type="button" class="logout-button" value="Logout">
       </div>
   <% } else { %> 
     <div class="login-register">
@@ -43,6 +44,7 @@
   <% } %> 
 
   <!-- If user is not logged in do not display textarea for new post-->
+  <!-- Do not display blog posts if not logged in -->
   <% if (loggedIn) { %>
     <div class="new-blog_post">
       <label for="title">Post title:</label>
@@ -50,7 +52,6 @@
       <textarea name="" class="post-body" cols="120" rows="30" style="resize: none"></textarea>
       <input type="button" class="submit-post" value="Submit Post">
     </div>
-  <% } %>
 
   <!-- Displays blog entries by current user stored in database -->
   <div class="blog-entries">
@@ -64,6 +65,7 @@
         <input type="button" class="edit-post" name="<%= post['id'] %>" value="Edit Post">
       </div>
     <% }); %> 
+  <% } %> <!-- End logged in specific HTML -->
   </div>
 </body>
 </html> 

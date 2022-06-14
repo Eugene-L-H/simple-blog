@@ -12,4 +12,11 @@ loginButton.addEventListener('click', () => {
   // *TODO: Perhaps encrypt password before sending to database? Look-up
 
   xhr.send(password);
+
+  // TODO: Reload page after recieving response from server.
+  // A hack-ey workaround to reloading the page after login (await?):
+  setTimeout(() => {
+    window.location.reload(true);
+  }, 500);
 });
+

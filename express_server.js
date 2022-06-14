@@ -189,6 +189,14 @@ app.post('/edit-post/:post_ID', (req, res) => {
 
 // GET ROUTES
 
+// Log user out
+app.get('/logout', (req, res) => {
+  loggedIn = false;
+  currentUser = '';
+  
+  return res.render('index', {blogPosts, currentUser, loggedIn});
+});
+
 // Render main page
 app.get('/', (req, res) => {
   res.render('index', { blogPosts, currentUser, loggedIn });
