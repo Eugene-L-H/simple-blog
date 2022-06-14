@@ -12,13 +12,13 @@ if (!submitButton === null) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', `/new-post/${post_title}`);
   
-      if (confirm('Submit post?')) {
-        console.log('post submitted')
-        xhr.send(post_body);
-      } else {
-        console.log('Post not submitted')
-      }
-      // Reload the window to trigger repopulation of blog posts
-      window.location.reload(true);
+    if (confirm('Submit post?')) {
+      console.log('post submitted')
+      xhr.send(post_body);
+    } else {
+      console.log('Post not submitted')
+    }
+    // Reload the window to trigger repopulation of blog posts
+    window.location.reload(true);
   });
 }

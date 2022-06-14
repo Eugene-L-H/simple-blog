@@ -25,6 +25,27 @@ const addListenerToClickRegister = () => {
   });
 }
 
+// Add listener to the submit registration button
+const submitRegistrationToDB = () => {
+  const usernameEntered = document.querySelector('.input-username').value;
+  const passwordEntered = document.querySelector('.input-password').value;
+  const params = `username=${usernameEntered}&password=${passwordEntered}`
+  console.log(`username: ${usernameEntered}, password: ${passwordEntered}`)
+
+  // prepare http request to be sent to the server
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', `/register-user`);
+
+  if (confirm('Submit post?')) {
+    console.log('Registration submitted')
+    xhr.send(params);
+  } else {
+    console.log('Error Registering')
+  }
+  // Reload the window to trigger repopulation of blog posts
+  window.location.reload(true);
+}
+
 // Create HTML for the registration form "popup"
 const registrationForm = document.createElement('div');
 registrationForm.setAttribute('class', 'register-form');
@@ -40,7 +61,7 @@ cancelButton.addEventListener('click', () => {
   addListenerToClickRegister();
 });
 
-// Div title
+// Registration form title
 const formTitle = document.createElement('p');
 formTitle.setAttribute('class', 'form-title');
 formTitle.innerHTML = 'Register';
@@ -65,12 +86,20 @@ inputpassword.setAttribute('class', 'input-password');
 inputpassword.setAttribute('type', 'text');
 inputpassword.setAttribute('placeholder', 'password');
 
+// Submit registration
+const submitRegistration = document.createElement('input');
+submitRegistration.setAttribute('type', 'button');
+submitRegistration.setAttribute('class', 'submit-registration');
+submitRegistration.setAttribute('value', 'Submit');
+submitRegistration.addEventListener('click', () => submitRegistrationToDB());
+
 registrationForm.append(cancelButton);
 registrationForm.append(formTitle);
 registrationForm.append(usernameLabel);
 registrationForm.append(inputUsername);
 registrationForm.append(passwordLabel);
 registrationForm.append(inputpassword);
+registrationForm.append(submitRegistration);
 
 // Add event listener to the REGISTER text under login prompt
 addListenerToClickRegister();

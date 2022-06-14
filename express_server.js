@@ -24,6 +24,7 @@ if (loggedIn) currentUser = 'Eugene';
 
 // CONNECT TO DATABASE
 const { Client } = require('pg');
+const { name } = require("ejs");
 
 const client = new Client({
   host: 'localhost',
@@ -106,6 +107,31 @@ app.post('/new-post/:post_title', (req, res) => {
       console.log('Error creating post: ', err.message);
     }
   });
+});
+
+app.post('/register-user', (req, res) => {
+  console.log('Registration data recieved');
+  const registrationQueryString = req.body;
+
+  // Convert query string to JS object extract username + password
+  const nameAndPassword = JSON.parse('{"' + registrationQueryString.replace(/&/g, '","').replace(/=/g,'":"') + '"}', (key, value) => { return key===""?value:decodeURIComponent(value) });
+  const username = nameAndPassword['username'];
+  const password = nameAndPassword['password'];
+
+  const registerUser = `
+    INSERT INTO users (user_name, user_password)
+      VALUES ('${username}', '${password}');
+  `;
+
+  client.query(registerUser, (err, res) => {
+    if(!err) {
+      console.log(`${username} registered as a user in the database.`);
+      retrieveBlogPostsFromDatabase();
+    } else {
+      console.log('Error registering user: ', err.message);
+    }
+  });
+
 });
 
 // UPDATE blog post content from user edit

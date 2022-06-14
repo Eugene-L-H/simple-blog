@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS blog_posts CASCADE;
-
-CREATE TABLE users (
-  ID SERIAL PRIMARY KEY NOT NULL,
-  user_name TEXT NOT NULL,
-  user_password TEXT NOT NULL
-);
