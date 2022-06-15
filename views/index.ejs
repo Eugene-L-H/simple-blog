@@ -64,11 +64,13 @@
     <div class="blog-entries">
       <% blogPosts.forEach(post => { %>
         <div class="post-wrapper post-wrapper<%= post['id'] %>" name="<%= post['id'] %>">
-          <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
+          <p class="title"><%= post['title'] %> </p><span class="author">&ensp; - by <%= post['author'] %></span>
           <p class="content" name="<%= post['id'] %>"><%= post['content'] %></p>
-          <p class="date"><%= post['post_date'].toDateString() %></p>
-          <input type="button" class="delete-post" name="<%= post['id'] %>" value="Delete Post">
-          <input type="button" class="edit-post" name="<%= post['id'] %>" value="Edit Post">
+          <p class="date">- <%= post['post_date'].toDateString() %></p>
+          <div class="post-buttons">
+            <input type="button" class="delete-post" name="<%= post['id'] %>" value="Delete Post">
+            <input type="button" class="edit-post" name="<%= post['id'] %>" value="Edit Post">
+          </div>
         </div>
       <% }); %>
     <% } %> <!-- End logged in specific HTML -->
