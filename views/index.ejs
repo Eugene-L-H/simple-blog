@@ -7,6 +7,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="../styles/styles.css">
   <link rel="stylesheet" href="../styles/header.css">
+  <link rel="stylesheet" href="../styles/main-area.css">
   <!-- js files -->
   <% if (!loggedIn) { %>
     <!-- These files load only when user not logged in -->
@@ -36,7 +37,7 @@
           <label for="login">Login:</label>
           <input type="text" class="username-field" name="login" placeholder="username">
           <label for="password">Password:</label>
-          <input type="text" class="password-field"  name="password" placeholder="password">
+          <input type="password" class="password-field"  name="password" placeholder="password">
           <input type="button" class="submit-login" value="Login">
         </div>
         <div class="register">
@@ -50,27 +51,28 @@
 
   <!-- If user is not logged in do not display textarea for new post-->
   <!-- Do not display blog posts if not logged in -->
-  <% if (loggedIn) { %>
-    <div class="new-blog_post">
-      <label for="title">Post title:</label>
-      <input type="text" name="title" class="post-title">
-      <textarea name="" class="post-body" cols="120" rows="30" style="resize: none"></textarea>
-      <input type="button" class="submit-post" value="Submit Post">
-    </div>
-
-  <!-- Displays blog entries by current user stored in database -->
-  <div class="blog-entries">
-    <% console.log(blogPosts) %>
-    <% blogPosts.forEach(post => { %>
-      <div class="post-wrapper post-wrapper<%= post['id'] %>" name="<%= post['id'] %>">
-        <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
-        <p class="content" name="<%= post['id'] %>"><%= post['content'] %></p>
-        <p class="date"><%= post['post_date'].toDateString() %></p>
-        <input type="button" class="delete-post" name="<%= post['id'] %>" value="Delete Post">
-        <input type="button" class="edit-post" name="<%= post['id'] %>" value="Edit Post">
+  
+  <div class="main-area">
+    <% if (loggedIn) { %>
+      <div class="new-blog_post">
+        <label for="title">Post title:</label>
+        <input type="text" name="title" class="post-title">
+        <textarea name="" class="post-body" cols="120" rows="30" style="resize: none"></textarea>
+        <input type="button" class="submit-post" value="Submit Post">
       </div>
-    <% }); %> 
-  <% } %> <!-- End logged in specific HTML -->
+    <!-- Displays blog entries by current user stored in database -->
+    <div class="blog-entries">
+      <% blogPosts.forEach(post => { %>
+        <div class="post-wrapper post-wrapper<%= post['id'] %>" name="<%= post['id'] %>">
+          <p class="title"><%= post['title'] %> - by <span class="author"><%= post['author'] %></span></p>
+          <p class="content" name="<%= post['id'] %>"><%= post['content'] %></p>
+          <p class="date"><%= post['post_date'].toDateString() %></p>
+          <input type="button" class="delete-post" name="<%= post['id'] %>" value="Delete Post">
+          <input type="button" class="edit-post" name="<%= post['id'] %>" value="Edit Post">
+        </div>
+      <% }); %>
+    <% } %> <!-- End logged in specific HTML -->
+    </div>
   </div>
 </body>
 </html> 

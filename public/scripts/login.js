@@ -6,6 +6,11 @@ const addOnClickToLogin = () => {
   loginButton.addEventListener('click', () => {
     const username = usernameField.value;
     const password = passwordField.value;
+
+    if (username === '' || password === '') {
+      console.log('Can not login: empty credential fields');
+      return;
+    }
   
     const xhr = new XMLHttpRequest();
     xhr.open('POST',`/login/${username}` );

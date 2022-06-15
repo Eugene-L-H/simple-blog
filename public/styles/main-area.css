@@ -1,0 +1,27 @@
+.main-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.new-blog_post {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-blog_post label {
+}
+
+.new-blog_post .post-title {
+  width: 34%;
+}
+
+.submit-post {
+  width: 14%;
+  padding: 0.5em;
+}
+
+.blog-entries {
+  width: 66%;
+}

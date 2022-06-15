@@ -62,6 +62,8 @@ app.post('/login/:username', (req, res) => {
   const username = req.params.username;
   const password = req.body;
 
+  res.send('You tried to log in');
+  
   // Check database for matching credentials
   const checkCredentials = `
     SELECT EXISTS (
@@ -149,6 +151,12 @@ app.post('/register-user', (req, res) => {
 
   const username = nameAndPassword['username'];
   const password = nameAndPassword['password'];
+
+  // Prevent users with empty username or password from being registered
+  if(username === '' || password === '') {
+    console.log('username or password can not be empty.');
+    return;
+  }
 
   // TODO: HASH/ENCRYPT PASSWORD BEFORE SUBMITTING *
 

@@ -38,7 +38,9 @@ const addOnclickToREGISTER = () => {
   cancelButton.addEventListener('click', () => {
     loginRegisterDiv.innerHTML = '';
     loginRegisterDiv.innerHTML = restoreLoginRegister;
+    // Restore event listener to login button
     addOnClickToLogin();
+    // Restore event listener to "REGISTER" text under login form
     addOnclickToREGISTER();
   });
 
@@ -71,9 +73,10 @@ const addOnclickToREGISTER = () => {
   const submitRegistration = document.createElement('input');
   submitRegistration.setAttribute('type', 'button');
   submitRegistration.setAttribute('class', 'submit-registration');
-  submitRegistration.setAttribute('value', 'Submit');
+  submitRegistration.setAttribute('value', 'Register');
   submitRegistration.addEventListener('click', () => submitRegistrationToDB());
 
+  // Add the HTML elements to the parent div
   titleDiv.append(cancelButton);
   titleDiv.append(formTitle);
   registrationForm.append(titleDiv);
@@ -93,6 +96,10 @@ const addOnclickToREGISTER = () => {
 const submitRegistrationToDB = () => {
   const usernameEntered = document.querySelector('.input-username').value;
   const passwordEntered = document.querySelector('.input-password').value;
+  if (usernameEntered === '' || passwordEntered === '') {
+    alert('username or password fields can not be empty.');
+    return;
+  } 
   const params = `username=${usernameEntered}&password=${passwordEntered}`
   console.log(`username: ${usernameEntered}, password: ${passwordEntered}`)
 
