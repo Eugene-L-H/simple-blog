@@ -4,20 +4,32 @@
   align-items: center;
 }
 
+.new-post_button {
+  width: fit-content;
+  margin: 3em 0 3em 10%;
+  padding: 1px;
+}
+
+.create-post_form {
+  padding-top: 3em;
+}
+
 .new-blog_post {
   display: flex;
   flex-direction: column;
   width: 37%;
   background-color: #FBF0D9;
+  padding-top: 10em;
 }
 
 .new-blog_post label {
   margin-left: 10%;
+  margin-top: 3em;
+  padding-top: 2em;
 }
 
 .new-blog_post .post-title {
   width: 34%;
-  margin-left: 10%;
   margin-bottom: 0.75em;
   padding: 0.25em;
 }
@@ -25,9 +37,14 @@
 .new-blog_post textarea {
   width: 80%;
   height: 30vh;
-  margin: 0 auto;
+  margin: 0 10%;
 }
 
+.new-blog_post .submit-post {
+  margin-bottom: 3em;
+}
+
+/* Blog entries */
 .blog-entries .title {
   display: inline-block;
   text-decoration: underline;
@@ -57,9 +74,11 @@
 }
 
 .post-wrapper {
-  margin-left: 10%;
-  margin-top: 3em;
   width: 80%;
+  margin-left: 10%;
+  /* margin-top: 4em; */
+  padding-top: 4em;
+  border-top: 1px solid black;
 }
 
 .post-wrapper .content{
@@ -78,7 +97,7 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  border-bottom: 1px solid black;
+  padding-bottom: 1em;
 }
 
 .post-buttons input {

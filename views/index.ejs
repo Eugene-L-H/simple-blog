@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../styles/styles.css">
   <link rel="stylesheet" href="../styles/header.css">
   <link rel="stylesheet" href="../styles/main-area.css">
+  <link rel="stylesheet" href="../styles/dynamic-classes.css">
   <!-- js files -->
   <% if (!loggedIn) { %>
     <!-- These files load only when user not logged in -->
@@ -16,6 +17,7 @@
   <% } %>
   <% if (loggedIn) { %>
     <script src="../scripts/logout.js" defer></script>
+    <script src="../scripts/display-new_post.js" defer></script>
     <script src="../scripts/submit_blog_post.js" defer></script>
     <script src="../scripts/edit_blog_post.js" defer></script>
     <script src="../scripts/delete_blog_post.js" defer></script>
@@ -48,6 +50,7 @@
       </div>
     <% } %>
   </header>
+  <p class="header-spacer"></p>
 
   <!-- If user is not logged in do not display textarea for new post-->
   <!-- Do not display blog posts if not logged in -->
@@ -55,11 +58,14 @@
   <div class="main-area">
     <% if (loggedIn) { %>
       <div class="new-blog_post">
-        <label for="title">Post title:</label>
-        <input type="text" name="title" class="post-title">
-        <textarea name="" class="post-body" cols="120" rows="30" style="resize: none"></textarea>
-        <input type="button" class="submit-post" value="Submit Post">
-      </div>
+        <input type="button" class="new-post_button" value="Create new blog post"/>
+        <div class="create-post_form hidden">
+          <label for="title">Post title:</label>
+            <input type="text" name="title" class="post-title">
+            <textarea name="" class="post-body" cols="120" rows="30" style="resize: none"></textarea>
+            <input type="button" class="submit-post" value="Submit Post">
+          </div>
+        </div>
     <!-- Displays blog entries by current user stored in database -->
     <div class="blog-entries">
       <% blogPosts.forEach(post => { %>

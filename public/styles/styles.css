@@ -10,3 +10,9 @@ body {
   background-color: lightblue;
 }
 
+/* Dynamic classes */
+
+.hidden {
+  display: none;
+}
+

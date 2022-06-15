@@ -1,4 +1,7 @@
 header {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,6 +10,11 @@ header {
   padding: 0 1em 1em 1em;
   background-color: #FBF0D9;
   margin: 0 auto;
+  border-bottom: solid 1px tan;
+}
+
+.header-spacer {
+  padding-bottom: 7em;
 }
 
 header .logout {
