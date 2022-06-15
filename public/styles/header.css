@@ -15,6 +15,7 @@ header .logout {
 }
 
 .logout .logout-button {
+  margin-top: 0.35em;
   padding: 2px;
 }
 
