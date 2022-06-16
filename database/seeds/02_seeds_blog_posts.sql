@@ -23,4 +23,12 @@ INSERT INTO blog_posts (author, title, content, post_date)
 
     Bibendum at varius vel pharetra vel turpis nunc eget. Tempus egestas sed sed risus pretium quam vulputate dignissim. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Cras ornare arcu dui vivamus arcu felis bibendum ut. Accumsan lacus vel facilisis volutpat est velit egestas dui id. Vivamus arcu felis bibendum ut tristique et egestas. Vitae nunc sed velit dignissim sodales. Porttitor lacus luctus accumsan tortor posuere. Faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique.',
     '2022-01-05'
-  );
+  ),
+  (
+  'Gloria',
+  'Tug-of-War',
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Odio aenean sed adipiscing diam donec adipiscing tristique risus nec. Vitae nunc sed velit dignissim sodales ut eu sem. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Neque ornare aenean euismod elementum. Ut enim blandit volutpat maecenas volutpat blandit. In massa tempor nec feugiat nisl pretium fusce id. Massa massa ultricies mi quis hendrerit. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum. Non curabitur gravida arcu ac tortor dignissim convallis aenean et. Pharetra sit amet aliquam id diam maecenas ultricies mi eget. Amet facilisis magna etiam tempor orci eu lobortis. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Suspendisse interdum consectetur libero id faucibus nisl. Donec et odio pellentesque diam volutpat commodo sed. Consequat nisl vel pretium lectus quam id. Felis eget velit aliquet sagittis id. Vel eros donec ac odio tempor orci. Quam adipiscing vitae proin sagittis. Pharetra diam sit amet nisl suscipit adipiscing bibendum.
+
+  Bibendum at varius vel pharetra vel turpis nunc eget. Tempus egestas sed sed risus pretium quam vulputate dignissim. Dictum varius duis at consectetur lorem donec massa sapien faucibus. Cras ornare arcu dui vivamus arcu felis bibendum ut. Accumsan lacus vel facilisis volutpat est velit egestas dui id. Vivamus arcu felis bibendum ut tristique et egestas. Vitae nunc sed velit dignissim sodales. Porttitor lacus luctus accumsan tortor posuere. Faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique.',
+  '2022-06-05'
+);

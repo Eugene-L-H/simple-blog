@@ -3,4 +3,8 @@ INSERT INTO users (user_name, user_password)
   (
     'Eugene',
     'password'
+  ),
+  (
+    'Gloria',
+    'password2'
   );

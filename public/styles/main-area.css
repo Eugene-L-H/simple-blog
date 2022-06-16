@@ -10,6 +10,7 @@
   padding: 1px;
 }
 
+/* CREATE NEW POST FORM */
 .create-post_form {
   padding-top: 3em;
 }
@@ -40,11 +41,25 @@
   margin: 0 10%;
 }
 
+.new-post_btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.new-blog_post .cancel-btn {
+  margin-left: auto;
+  height: 25px;
+  width: 25px;
+  margin-top: 0.75em;
+  margin-right: 9.5%;
+}
+
 .new-blog_post .submit-post {
   margin-bottom: 3em;
 }
 
-/* Blog entries */
+/* BLOG ENTRIES */
 .blog-entries .title {
   display: inline-block;
   text-decoration: underline;
