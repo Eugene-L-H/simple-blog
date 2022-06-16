@@ -8,13 +8,9 @@ header {
   text-align: center;
   width: 37%;
   padding: 0 1em 1em 1em;
-  background-color: #FBF0D9;
+  background-color: #C4A484;
   margin: 0 auto;
-  border-bottom: solid 1px tan;
-}
-
-.header-spacer {
-  padding-bottom: 7em;
+  border-bottom: solid 1px brown;
 }
 
 header .logout {
@@ -101,4 +97,8 @@ h1 {
   height: 2em;
   width: 2em;
   margin-right: auto;
+}
+
+.header-spacer {
+  padding-bottom: 7em;
 }

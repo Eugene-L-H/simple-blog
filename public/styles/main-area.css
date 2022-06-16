@@ -147,7 +147,23 @@
     width: fit-content;
   }
 
+  .header-spacer {
+    padding-bottom: 5em;
+  }
+
+  .create-post_form label {
+    font-size: 0.75em;
+  }
+
   .new-blog_post .post-title {
     width: 65%;
+  }
+}
+
+@media screen and (max-width: 490px) {
+
+
+  .new-blog_post .post-title {
+    width: 57%;
   }
 }
