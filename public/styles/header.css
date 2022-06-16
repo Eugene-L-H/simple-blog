@@ -10,7 +10,9 @@ header {
   padding: 0 1em 1em 1em;
   background-color: #C4A484;
   margin: 0 auto;
-  border-bottom: solid 1px brown;
+  border-right: 1px solid tan;
+  border-left: 1px solid brown;
+  border-bottom: solid 2px brown;
 }
 
 header .logout {
