@@ -10,25 +10,32 @@ const createEditPostHTML = (bodyText, postID) => {
     editTextarea.setAttribute('class', 'edited-text');
     editTextarea.innerHTML = bodyText;
 
+    // Div to contain buttons
+    let buttonsDiv = document.createElement('div');
+    buttonsDiv.setAttribute('class', 'edit-post_buttons');
+    buttonsDiv.setAttribute('style', 'display: flex');
+    buttonsDiv.setAttribute('style', 'display: flex; justify-content: space-between');
+
     // Create confirm or cancel buttons
     let cancelButton = document.createElement('input');
     cancelButton.setAttribute('type', 'button');
-    cancelButton.setAttribute('class', 'cancel-btn');
+    cancelButton.setAttribute('class', 'cancel-btn_edit');
     cancelButton.setAttribute('value', '❌');
+    
     let confirmButton = document.createElement('input');
     confirmButton.setAttribute('type', 'button');
     confirmButton.setAttribute('class', 'confirm-btn')
     confirmButton.setAttribute('value', '✅');
+
+    buttonsDiv.append(cancelButton);
+    buttonsDiv.append(confirmButton);
     
     // Append created elements to editDiv
     editDiv.append(editTextarea);
-    editDiv.append(cancelButton);
-    editDiv.append(confirmButton);
+    editDiv.append(buttonsDiv);
 
     return editDiv;
 }
-
-
 
 // Add event listeners to 'Edit Post' buttons
 for (let button of editButtons) {
@@ -58,7 +65,7 @@ for (let button of editButtons) {
         currentPostStateWrapper.append(editPostHTML);
         
         // CANCEL EDIT BUTTON
-        const cancelEditButton = document.querySelector('.cancel-btn');
+        const cancelEditButton = document.querySelector('.cancel-btn_edit');
         cancelEditButton.addEventListener('click', () => {
           // Revert HTML to it's original state before edit button was clicked
           currentPostStateWrapper.innerHTML = '';
@@ -86,12 +93,16 @@ for (let button of editButtons) {
           }
 
           // Update database with new value
-
           // prepare http request to be sent to the server
           let xhr = new XMLHttpRequest();
           xhr.open('POST', `/edit-post/${postID}`);
 
-          xhr.send(editedText);
+          if (confirm('Confirm edit?')) {
+            xhr.send(editedText);
+          } else {
+            console.log('Changes not committed.');
+          }
+
         });
 
         // Match between button and post found; break

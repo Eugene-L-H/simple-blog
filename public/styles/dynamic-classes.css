@@ -1,6 +1,17 @@
-Dynamic classes
+/* Dynamic classes */
 
 .hidden {
   display: none;
+}
+
+/* Change height of textarea during editing of post */
+.edited-text {
+  width: 100%;
+  height: 25vw;
+  font-size: 1em;
+}
+
+.edit-post_buttons {
+  margin: 1em 0;
 }
 

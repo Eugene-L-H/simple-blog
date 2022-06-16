@@ -2,7 +2,7 @@ const blogEntries = document.querySelector('.blog-entries');
 const title = document.querySelector('.post-title');
 const postBody = document.querySelector('.post-body');
 const submitButton = document.querySelector('.submit-post');
-const cancelButton = document.querySelector('.cancel-btn');
+const cancelButton = document.querySelector('.cancel-btn_new');
 
 submitButton.addEventListener('click', () => {
   const post_title = title.value;
