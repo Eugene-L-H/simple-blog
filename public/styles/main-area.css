@@ -65,7 +65,8 @@
 .blog-entries {
   border-right: 1px solid tan;
   border-left: 1px solid brown;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 }
 
 .blog-entries .title {
