@@ -47,7 +47,7 @@ const retrieveBlogPostsFromDatabase = () => {
       console.log('Fetching posts from database.')
       blogPosts = res.rows;
       blogPosts = blogPosts.sort((a, b) => {
-        return b.post_date - a.post_date;
+        return a.post_date - b.post_date;
       });
     } else {
       console.log('Error retrieving posts: ', err.message);
@@ -81,7 +81,6 @@ app.post('/login/:username', (req, res) => {
 
   client.query(getPasswordFromDB, (err, queryResults) => {
     if(!err) {
-        console.log('queryResults: ', queryResults.rows[0]['user_password']);
       // If compareSync with provided password passes credentials are valid
       if(bcrypt.compareSync(password, queryResults.rows[0]['user_password'])) {
         loggedIn = true;

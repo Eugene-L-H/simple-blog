@@ -70,7 +70,8 @@
         </div>
     <!-- Displays blog entries by current user stored in database -->
     <div class="blog-entries">
-      <% blogPosts.forEach(post => { %>
+      <!-- Going through posts in reverse allows for posts made on same day to render in proper order -->
+      <% blogPosts.slice().reverse().forEach(post => { %>
         <div class="post-wrapper post-wrapper<%= post['id'] %>" name="<%= post['id'] %>">
           <p class="title"><%= post['title'] %> </p><span class="author">&ensp; - by <%= post['author'] %></span>
           <p class="content" name="<%= post['id'] %>"><%= post['content'] %></p>

@@ -25,7 +25,14 @@ submitButton.addEventListener('click', () => {
       console.log('Post not submitted')
     }
     // Reload the window to trigger repopulation of blog posts
-    window.location.reload(true);
+    /* Using setTimeout to reload page after the posts have been reloaded
+    from the database on the server. I realize that this is not a great
+    solution as were this live on the internet there's no gaurantee that
+    the server will have updated in time after the xhr.send() has been made. 
+    */
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 500);
 });
 
 cancelButton.addEventListener('click', () => {
