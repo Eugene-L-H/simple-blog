@@ -4,9 +4,9 @@ const restoreLoginRegister = `
   <div class="login-register">
     <div class="login">
       <label for="login">Username:</label>
-      <input type="text" name="login" placeholder="username"> 
+      <input type="text" class="username-field" name="login" placeholder="username"> 
       <label for="password">Password:</label>
-      <input type="text" name="password" placeholder="password">
+      <input type="password" class="password-field" name="password" placeholder="password">
       <input type="button" class="submit-login" value="Login">
     </div>
     <div class="register">
@@ -96,12 +96,12 @@ const addOnclickToREGISTER = () => {
 const submitRegistrationToDB = () => {
   const usernameEntered = document.querySelector('.input-username').value;
   const passwordEntered = document.querySelector('.input-password').value;
+
   if (usernameEntered === '' || passwordEntered === '') {
     alert('username or password fields can not be empty.');
     return;
   } 
   const params = `username=${usernameEntered}&password=${passwordEntered}`
-  console.log(`username: ${usernameEntered}, password: ${passwordEntered}`)
 
   // prepare http request to be sent to the server
   let xhr = new XMLHttpRequest();
