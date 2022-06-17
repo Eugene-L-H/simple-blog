@@ -1,5 +1,5 @@
 const express = require("express");
-const res = require("express/lib/response");
+const res = require("express/lib/response"); // do I need this?
 const app = express();
 
 const PORT = 8080;
@@ -11,6 +11,9 @@ app.use(morgan('dev'));
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.text({ type: "text/plain" }));
+
+// Password encryption
+const bcrypt = require('bcryptjs');
 
 // Use static module so client-side js can be linked to ejs file
 const path = require("path");
@@ -62,8 +65,11 @@ app.post('/login/:username', (req, res) => {
   const username = req.params.username;
   const password = req.body;
 
-  res.send('You tried to log in');
-  
+  const getPasswordFromDB = `
+    SELECT user_password FROM users
+    WHERE user_name = '${username}'
+  `;
+
   // Check database for matching credentials
   const checkCredentials = `
     SELECT EXISTS (
@@ -73,10 +79,11 @@ app.post('/login/:username', (req, res) => {
     )
   `;
 
-  client.query(checkCredentials, (err, queryResults) => {
+  client.query(getPasswordFromDB, (err, queryResults) => {
     if(!err) {
-      // If username/password combo exists in database:
-      if(queryResults.rows[0]['exists']) {
+        console.log('queryResults: ', queryResults.rows[0]['user_password']);
+      // If compareSync with provided password passes credentials are valid
+      if(bcrypt.compareSync(password, queryResults.rows[0]['user_password'])) {
         loggedIn = true;
         currentUser = username;
         console.log(`Logging ${currentUser} in...`);
@@ -151,18 +158,20 @@ app.post('/register-user', (req, res) => {
 
   const username = nameAndPassword['username'];
   const password = nameAndPassword['password'];
+  const hashedPassword = bcrypt.hashSync(password, 10);
 
   // Prevent users with empty username or password from being registered
   if(username === '' || password === '') {
-    console.log('username or password can not be empty.');
-    return;
+    return res
+      .status(400)
+      .send('Both password and email fields must be filled out to register.');
   }
 
   // TODO: HASH/ENCRYPT PASSWORD BEFORE SUBMITTING *
 
   const registerUser = `
     INSERT INTO users (user_name, user_password)
-      VALUES ('${username}', '${password}');
+      VALUES ('${username}', '${hashedPassword}');
   `;
 
   client.query(registerUser, (err, res) => {
