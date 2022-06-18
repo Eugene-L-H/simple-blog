@@ -16,11 +16,10 @@ const addOnClickToLogin = () => {
     xhr.open("POST", `/login/${username}`, false);
     xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 404) {
-        // console.log( xhr.responseText );
 
         // Display login error message above login form
         const errorMessage = document.querySelector('.login-error');
-        errorMessage.classList.toggle('hidden');
+        errorMessage.classList.remove('hidden');
       } else {
         setTimeout(() => {
           window.location.reload(true);

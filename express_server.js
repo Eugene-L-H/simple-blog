@@ -160,9 +160,7 @@ app.post("/register-user", (req, res) => {
 
   // Prevent users with empty username or password from being registered
   if (username === "" || password === "") {
-    return res
-      .status(400)
-      .send("Both password and email fields must be filled out to register.");
+    return console.log("Both password and email fields must be filled out to register.");
   }
 
   // TODO: HASH/ENCRYPT PASSWORD BEFORE SUBMITTING *
@@ -172,8 +170,9 @@ app.post("/register-user", (req, res) => {
       VALUES ('${username}', '${hashedPassword}');
   `;
 
-  client.query(registerUser, (err, res) => {
+  client.query(registerUser, (err, respond) => {
     if (!err) {
+      res.sendStatus(200);
       console.log(`${username} registered as a user in the database.`);
       retrieveBlogPostsFromDatabase();
     } else {

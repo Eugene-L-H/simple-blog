@@ -107,6 +107,14 @@ const submitRegistrationToDB = () => {
   // prepare http request to be sent to the server
   let xhr = new XMLHttpRequest();
   xhr.open('POST', `/register-user`);
+  xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log('User registered');
+      const successfulRegister = document.querySelector('.user-registered');
+      successfulRegister.classList.toggle('hidden');
+    }
+  } 
+    
 
   if (confirm('Submit ?')) {
     console.log('Registration submitted')
@@ -115,7 +123,7 @@ const submitRegistrationToDB = () => {
     console.log('Error Registering')
   }
   // Reload the window to trigger repopulation of blog posts
-  window.location.reload(true);
+  // window.location.reload(true);
 }
 
 // Add event listener to the REGISTER text under login prompt
