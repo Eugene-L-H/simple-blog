@@ -85,7 +85,7 @@ app.post("/login/:username", (req, res) => {
         res.render("index", { blogPosts, currentUser, loggedIn });
       } else {
         console.log('Username or password does not match.');
-        res.sendStatus(404);
+        res.sendStatus(401)
       }
     } else {
       console.log("Error: ", err.message);

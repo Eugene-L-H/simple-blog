@@ -15,8 +15,8 @@ const addOnClickToLogin = () => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `/login/${username}`, false);
     xhr.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 404) {
-
+      if (this.readyState == 4 && this.status == 401) {
+        console.log('401: username or password does not match.');
         // Display login error message above login form
         const errorMessage = document.querySelector('.login-error');
         errorMessage.classList.remove('hidden');
