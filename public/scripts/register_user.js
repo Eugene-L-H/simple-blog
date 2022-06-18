@@ -3,6 +3,7 @@ const loginRegisterDiv = document.querySelector('.login-register');
 const restoreLoginRegister = `
   <div class="login-register">
     <div class="login">
+      <span class="login-error hidden">Username or password does not match</span>
       <label for="login">Username:</label>
       <input type="text" class="username-field" name="login" placeholder="username"> 
       <label for="password">Password:</label>

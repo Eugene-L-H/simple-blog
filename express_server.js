@@ -70,15 +70,6 @@ app.post('/login/:username', (req, res) => {
     WHERE user_name = '${username}'
   `;
 
-  // Check database for matching credentials
-  const checkCredentials = `
-    SELECT EXISTS (
-      SELECT * FROM users
-      WHERE user_name = '${username}'
-      AND user_password = '${password}'
-    )
-  `;
-
   client.query(getPasswordFromDB, (err, queryResults) => {
     if(!err) {
       // If compareSync with provided password passes credentials are valid
@@ -92,6 +83,7 @@ app.post('/login/:username', (req, res) => {
         res.render('index', { blogPosts, currentUser, loggedIn })
       } else {
         console.log('Username or password does not match.')
+        res.send('Username or password does not match.')
       }
     } else {
       console.log('Error: ', err.message);

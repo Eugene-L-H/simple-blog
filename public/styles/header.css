@@ -45,6 +45,15 @@ h1 {
   align-items: center;
 }
 
+.login-error {
+  position: fixed;
+  margin-top: -1.25em;
+  font-size: 0.9em;
+  font-style: italic;
+  color: yellow;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
 /* Label for login */
 .login label,
 .register-form label {
