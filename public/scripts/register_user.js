@@ -41,7 +41,7 @@ const addOnclickToREGISTER = () => {
     loginRegisterDiv.innerHTML = '';
     loginRegisterDiv.innerHTML = restoreLoginRegister;
     // Hide successful registration message after switching to login
-    registrationMessageSpan.classList.toggle('hidden');
+    registrationMessageSpan.textContent = '';
     // Restore event listener to login button
     addOnClickToLogin();
     // Restore event listener to "REGISTER" text under login form
@@ -120,7 +120,6 @@ const submitRegistrationToDB = () => {
 
       console.log('messageDOM Element: ', registrationMessage);
       registrationMessageSpan.textContent = registrationMessage;
-      registrationMessageSpan.classList.toggle('hidden');
     }
   } 
     
