@@ -15,6 +15,12 @@ header {
   border-bottom: solid 2px brown;
 }
 
+header .user-registered {
+  position: fixed;
+  margin-top: 3.1em;
+  color: yellow;
+}
+
 header .logout {
   margin-top: 0.5em;
   font-size: 0.9em;

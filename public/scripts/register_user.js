@@ -1,4 +1,5 @@
 const loginRegisterDiv = document.querySelector('.login-register');
+const registrationMessageSpan = document.querySelector('.user-registered');
 
 const restoreLoginRegister = `
   <div class="login-register">
@@ -39,6 +40,8 @@ const addOnclickToREGISTER = () => {
   cancelButton.addEventListener('click', () => {
     loginRegisterDiv.innerHTML = '';
     loginRegisterDiv.innerHTML = restoreLoginRegister;
+    // Hide successful registration message after switching to login
+    registrationMessageSpan.classList.toggle('hidden');
     // Restore event listener to login button
     addOnClickToLogin();
     // Restore event listener to "REGISTER" text under login form
@@ -110,8 +113,14 @@ const submitRegistrationToDB = () => {
   xhr.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       console.log('User registered');
-      const successfulRegister = document.querySelector('.user-registered');
-      successfulRegister.classList.toggle('hidden');
+
+      const registrationMessage = `
+        ${usernameEntered} registered! Happy blogging!
+      `;
+
+      console.log('messageDOM Element: ', registrationMessage);
+      registrationMessageSpan.textContent = registrationMessage;
+      registrationMessageSpan.classList.toggle('hidden');
     }
   } 
     

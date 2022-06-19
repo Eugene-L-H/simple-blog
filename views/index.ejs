@@ -27,6 +27,7 @@
 <body>
   <header>
     <h1>Simple Blog</h1>
+    <span class="user-registered hidden"></span>
     <!-- Display login inputs if not logged in, logout input if logged in-->
     <% if (loggedIn) { %>
         <div class="logout">
@@ -38,7 +39,6 @@
         <div class="login">
           <!-- Login/Register messages -->
           <span class="login-error hidden">Username or password does not match</span>
-          <span class="user-registered hidden"></span>
           <label for="login">Login:</label>
           <input type="text" class="username-field" name="login" placeholder="username">
           <label for="password">Password:</label>
